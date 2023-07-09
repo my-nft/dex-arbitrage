@@ -25,12 +25,13 @@ async function getNonce(){
 getNonce()
 let counter = 0;
 
-const { tokens } = require('./TokensETH.js');
+const { tokens } = require('./TokensSushi.js');
 
 /** PANCAKE SWAP */
 const PancakeSwapAbi = require('./uniswapv2Abi.json');
 
-// const PancakeSwapAddress = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D";
+const Erc20Abi = require('./erc20.json');
+
 const PancakeSwapAddress = process.env.DEX_1; 
 const PancakeSwapContractInstance = new web3.eth.Contract(PancakeSwapAbi, PancakeSwapAddress);
 
@@ -41,7 +42,7 @@ const BurgerSwapAddress = process.env.DEX_2;
 
 const BurgerSwapContractInstance = new web3.eth.Contract(BurgerSwapAbi, BurgerSwapAddress);
 
-const arbContractAddress = "0x552f8ea9d4dB31D3b4C1ddA689B2d636DdEEA345";
+const arbContractAddress = "0x8b650b9232aF12e9f0B1d75289b8E36EaDdC5d0B";
 let tradingAgent = new ethers.Contract(
   arbContractAddress,
   ['function sellBuyOptimized(address _bnb, address _token, address _pancake, address _burger, uint256 _gasFees, uint256 _position) public'],
@@ -56,27 +57,66 @@ async function run_wbnb(token1, token2, token_name){
   path.push(token1);
   path.push(token2);
   try{
-    const dex1 = await PancakeSwapContractInstance.methods.getAmountsOut(oneEth.toString(), path).call();
+    const erc20ContractInstance = new web3.eth.Contract(Erc20Abi, token2);
+    // console.log("Erc20Abi: ", Erc20Abi);
+    // console.log("token2: ", token2);
+    const decimals = await erc20ContractInstance.methods.decimals().call();
 
+    // console.log("decimals: ", decimals);
+    // console.log("1-path: ", path);
+    // console.log("1-oneEth: ", oneEth);
+    const dex1 = await PancakeSwapContractInstance.methods.getAmountsOut(oneEth.toString(), path).call();
+    // console.log("dex1: ", dex1);
     pancakeSellPriceBURGER = dex1[1];
     path = [];
     path.push(token2);
     path.push(token1);
     try{
       const dex2 = await BurgerSwapContractInstance.methods.getAmountsOut(pancakeSellPriceBURGER.toString().replace('n',''), path).call();
+      // console.log("dex2: ", dex2);
       pancakeBurgerBURGER = dex2[1];
       if (Number(pancakeBurgerBURGER)/oneEth > threshold){
         console.log("Uniswap -> Sushi ratio: ", token_name, Number(pancakeBurgerBURGER)/oneEth)
         trade(PancakeSwapAddress, BurgerSwapAddress, token2)
       }
     }catch(e){
-      console.log("path: ", path);
-      console.log("dex2 e: ", e);
+      // console.log("path: ", path);
+      // console.log("dex2 e: ", e);
     }
     
   }catch(e){
-    console.log("path: ", path);
-    console.log("dex 1e: ", e);
+    // console.log("path: ", path);
+    // console.log("dex 1e: ", e);
+  }
+
+  try{
+    path = [];
+    path.push(token1);
+    path.push(token2);
+    // console.log("2-path: ", path);
+    // console.log("2-oneEth: ", oneEth);
+    const dex1 = await BurgerSwapContractInstance.methods.getAmountsOut(oneEth.toString(), path).call();
+    // console.log("2-dex1: ", dex1);
+    pancakeSellPriceBURGER = dex1[1];
+    path = [];
+    path.push(token2);
+    path.push(token1);
+    try{
+      const dex2 = await PancakeSwapContractInstance.methods.getAmountsOut(pancakeSellPriceBURGER.toString().replace('n',''), path).call();
+      pancakeBurgerBURGER = dex2[1];
+      // console.log("2-dex2: ", dex2);
+      if (Number(pancakeBurgerBURGER)/oneEth > threshold){
+        console.log("Sushi -> Uniswap ratio: ", token_name, Number(pancakeBurgerBURGER)/oneEth)
+        trade(BurgerSwapAddress, PancakeSwapAddress, token2)
+      }
+    }catch(e){
+      // console.log("path: ", path);
+      // console.log("2-dex2 e: ", e);
+    }
+    
+  }catch(e){
+    // console.log("path: ", path);
+    // console.log("dex 1e: ", e);
   }
   
   // PancakeSwapContractInstance.methods.getAmountsOut(oneEth, path).call(function(err, res) {
@@ -147,13 +187,13 @@ setInterval(function(){
 
 console.log("loading data...")
 
-async function trade(dexSell, dexBuy, token) {
+async function trade(dexBuy, dexSell, token) {
 	console.log("trading wbnb");
 	//gasFees = 317157*web3.utils.fromWei(gasPrice, "wei")
 	// gasFees = gasPrice * gasLimit - 50000
 	console.log("WBNB: ", tokens['WETH']);
+  console.log("dexBuy: ", dexBuy);
 	console.log("dexSell: ", dexSell);
-	console.log("dexBuy: ", dexBuy);
 	console.log("token: ", token);
 
 }
