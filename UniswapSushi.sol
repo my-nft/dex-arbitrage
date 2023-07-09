@@ -1,4 +1,5 @@
 
+// SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.7.4;
 
 abstract contract Pancake {
@@ -39,7 +40,7 @@ contract ArbBot {
 	}
 
 	modifier onlyTrader() {
-		require (msg.sender == owner);
+		require (msg.sender == trader);
 		_;
 	}
 
@@ -51,21 +52,29 @@ contract ArbBot {
 		return address(this).balance;
 	}
 
+	function transferOwnership(address payable _owner) onlyOwner public {
+		owner = _owner;
+   	}
+
+	function setTrader(address _trader) onlyOwner public {
+		trader = _trader;
+   	}
+
 	function approve(address _token, address payable _uni, uint256 _amount) internal {
         ERC20 token = ERC20(_token);
         token.approve(_uni, _amount);
     }
 
-	function sellBuyOptimizedUnprofitable(address _bnb, address _token, address _pancake, address _burger, uint256 _gasFees, uint256 _interface, uint256 _position) onlyTrader public {
-      require(positionSize + _gasFees > sellBuyTransaction(_bnb, _token, _pancake, _burger, _position) , "Unprofitable trade !");
-  }
+	function sellBuyOptimizedUnprofitable(address _bnb, address _token, address _pancake, address _burger, uint256 _gasFees, uint256 _position) onlyTrader public {
+      require(_position + _gasFees > sellBuyTransaction(_bnb, _token, _pancake, _burger, _position) , "Unprofitable trade !");
+  	}
 
-	function sellBuyOptimized(address _bnb, address _token, address _pancake, address _burger, uint256 _gasFees, uint256 _interface, uint256 _position) onlyTrader public {
-      require(positionSize + _gasFees > sellBuyTransaction(_bnb, _token, _pancake, _burger, _position) , "Unprofitable trade !");
-  }
+	function sellBuyOptimized(address _bnb, address _token, address _pancake, address _burger, uint256 _gasFees, uint256 _position) onlyTrader public {
+      require(_position + _gasFees < sellBuyTransaction(_bnb, _token, _pancake, _burger, _position) , "Unprofitable trade !");
+    }
 
     // ETH-ETH
-	function sellBuyTransaction(address _bnb, address _token, address _pancake, address _burger, uint256 _value) internal returns(uint256){
+	function sellBuyTransaction(address _bnb, address _token, address _pancake, address _burger, uint256 _value) public returns(uint256){
 
     	Pancake burger;
     	Pancake pancake;
