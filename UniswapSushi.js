@@ -118,55 +118,6 @@ async function run_wbnb(token1, token2, token_name){
     // console.log("path: ", path);
     // console.log("dex 1e: ", e);
   }
-  
-  // PancakeSwapContractInstance.methods.getAmountsOut(oneEth, path).call(function(err, res) {
-  //   if (err) {
-  //       console.log("err: ", err);
-  //       // return;
-  //   }
-  //   pancakeSellPriceBURGER = res[1];
-  //   path = [];
-  //   path.push(token2);
-  //   path.push(token1);
-  //   BurgerSwapContractInstance.methods.getAmountsOut(pancakeSellPriceBURGER, path).call(function(err, res) {
-  //     if (err) {
-  //         console.log("err 2: ", err);
-  //         // return;
-  //     }
-  //     pancakeBurgerBURGER = res[1];
-  //     if (pancakeBurgerBURGER/oneEth > threshold){
-  //       console.log("Pancake -> Sushi ratio: ", token_name, pancakeBurgerBURGER/oneEth)
-  //       trade(PancakeSwapAddress, BurgerSwapAddress, token2)
-  //     }
-  //   });
-  // });
-  // var path = [];
-  // path.push(token1);
-  // path.push(token2);
-  // BurgerSwapContractInstance.methods.getAmountsOut(oneEth, path).call(function(err, res) {
-  //   if (err) {
-  //       // return;
-  //   }
-  //   pancakeSellPriceBURGER = res[1];
-  //   path = [];
-  //   path.push(token2);
-  //   path.push(token1);
-  //   PancakeSwapContractInstance.methods.getAmountsOut(pancakeSellPriceBURGER, path).call(function(err, res) {
-  //     if (err) {
-  //         // return;
-  //     }
-  //     pancakeBurgerBURGER = res[1];
-  //     // console.log("BurgerSwap --> PancakeSwap ")
-  //     // console.log("token1: ", token1)
-  //     // console.log("token2: ", token2)
-  //     counter = counter + 1
-
-  //     if (pancakeBurgerBURGER/oneEth > threshold){
-  //       console.log("Sushi --> Pancake ratio", token_name, ": ",pancakeBurgerBURGER/oneEth)
-  //       trade(BurgerSwapAddress, PancakeSwapAddress, token2)
-  //     }
-  //   });
-  // });
 }
 
 for (token in tokens){
