@@ -25,7 +25,7 @@ async function getNonce(){
 getNonce()
 let counter = 0;
 
-const { tokens } = require('./TokensETH.js');
+const { tokens } = require('./TestTokens.js');
 
 /** PANCAKE SWAP */
 const PancakeSwapAbi = [{"inputs":[{"internalType":"address","name":"_factory","type":"address"},{"internalType":"address","name":"_WETH","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"WETH","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"tokenA","type":"address"},{"internalType":"address","name":"tokenB","type":"address"},{"internalType":"uint256","name":"amountADesired","type":"uint256"},{"internalType":"uint256","name":"amountBDesired","type":"uint256"},{"internalType":"uint256","name":"amountAMin","type":"uint256"},{"internalType":"uint256","name":"amountBMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"addLiquidity","outputs":[{"internalType":"uint256","name":"amountA","type":"uint256"},{"internalType":"uint256","name":"amountB","type":"uint256"},{"internalType":"uint256","name":"liquidity","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"amountTokenDesired","type":"uint256"},{"internalType":"uint256","name":"amountTokenMin","type":"uint256"},{"internalType":"uint256","name":"amountETHMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"addLiquidityETH","outputs":[{"internalType":"uint256","name":"amountToken","type":"uint256"},{"internalType":"uint256","name":"amountETH","type":"uint256"},{"internalType":"uint256","name":"liquidity","type":"uint256"}],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"factory","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"},{"internalType":"uint256","name":"reserveIn","type":"uint256"},{"internalType":"uint256","name":"reserveOut","type":"uint256"}],"name":"getAmountIn","outputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"uint256","name":"reserveIn","type":"uint256"},{"internalType":"uint256","name":"reserveOut","type":"uint256"}],"name":"getAmountOut","outputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"}],"name":"getAmountsIn","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"}],"name":"getAmountsOut","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountA","type":"uint256"},{"internalType":"uint256","name":"reserveA","type":"uint256"},{"internalType":"uint256","name":"reserveB","type":"uint256"}],"name":"quote","outputs":[{"internalType":"uint256","name":"amountB","type":"uint256"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"address","name":"tokenA","type":"address"},{"internalType":"address","name":"tokenB","type":"address"},{"internalType":"uint256","name":"liquidity","type":"uint256"},{"internalType":"uint256","name":"amountAMin","type":"uint256"},{"internalType":"uint256","name":"amountBMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"removeLiquidity","outputs":[{"internalType":"uint256","name":"amountA","type":"uint256"},{"internalType":"uint256","name":"amountB","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"liquidity","type":"uint256"},{"internalType":"uint256","name":"amountTokenMin","type":"uint256"},{"internalType":"uint256","name":"amountETHMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"removeLiquidityETH","outputs":[{"internalType":"uint256","name":"amountToken","type":"uint256"},{"internalType":"uint256","name":"amountETH","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"liquidity","type":"uint256"},{"internalType":"uint256","name":"amountTokenMin","type":"uint256"},{"internalType":"uint256","name":"amountETHMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"removeLiquidityETHSupportingFeeOnTransferTokens","outputs":[{"internalType":"uint256","name":"amountETH","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"liquidity","type":"uint256"},{"internalType":"uint256","name":"amountTokenMin","type":"uint256"},{"internalType":"uint256","name":"amountETHMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"},{"internalType":"bool","name":"approveMax","type":"bool"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"removeLiquidityETHWithPermit","outputs":[{"internalType":"uint256","name":"amountToken","type":"uint256"},{"internalType":"uint256","name":"amountETH","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"liquidity","type":"uint256"},{"internalType":"uint256","name":"amountTokenMin","type":"uint256"},{"internalType":"uint256","name":"amountETHMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"},{"internalType":"bool","name":"approveMax","type":"bool"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"removeLiquidityETHWithPermitSupportingFeeOnTransferTokens","outputs":[{"internalType":"uint256","name":"amountETH","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"tokenA","type":"address"},{"internalType":"address","name":"tokenB","type":"address"},{"internalType":"uint256","name":"liquidity","type":"uint256"},{"internalType":"uint256","name":"amountAMin","type":"uint256"},{"internalType":"uint256","name":"amountBMin","type":"uint256"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"},{"internalType":"bool","name":"approveMax","type":"bool"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"removeLiquidityWithPermit","outputs":[{"internalType":"uint256","name":"amountA","type":"uint256"},{"internalType":"uint256","name":"amountB","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapETHForExactTokens","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactETHForTokens","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactETHForTokensSupportingFeeOnTransferTokens","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactTokensForETH","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactTokensForETHSupportingFeeOnTransferTokens","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactTokensForTokens","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactTokensForTokensSupportingFeeOnTransferTokens","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"},{"internalType":"uint256","name":"amountInMax","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapTokensForExactETH","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"},{"internalType":"uint256","name":"amountInMax","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapTokensForExactTokens","outputs":[{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"stateMutability":"nonpayable","type":"function"},{"stateMutability":"payable","type":"receive"}]
@@ -204,36 +204,24 @@ const arbContractAbi = [
 let oneEth = position
 
 async function run_wbnb(token1, token2, token_name){
-	// console.log("run_wbnb: ", run_wbnb);
-
 	var path = [];
 	path.push(token1);
 	path.push(token2);
 	let res
 	try{
-		// console.log("path: ", path)
 		res = await PancakeSwapContractInstance.methods.getAmountsOut(oneEth, path).call();
-		// console.log("res: ", res);
+		console.log("1-getAmountsOut res: ", res);
 	}catch(e){
-		console.log("line 214");
-		console.log("e: ", e);
-		
-	}
-	
-    // if (err) {
-    //     // return;
-    // }
-    pancakeSellPriceBURGER = res[1];
-    // console.log("Pancake -> Sushi pancakeSellPriceBURGER: ", pancakeSellPriceBURGER)
-	try{
-		res  = await BurgerSwapContractInstance.methods.getExpectedRate(token2, token1, pancakeSellPriceBURGER.toString().replace('n','')).call()
-	}catch(e){
-		console.log("line 227");
 		console.log("e: ", e);	
 	}
-	// console.log("pancakeSellPriceBURGER: ", pancakeSellPriceBURGER);
-	// console.log("res[0].toString().replace('n',''): ", res[0].toString().replace('n',''));
-	// console.log("oneEth: ", oneEth);
+
+    pancakeSellPriceBURGER = res[1];
+	try{
+		res  = await BurgerSwapContractInstance.methods.getExpectedRate(token2, token1, pancakeSellPriceBURGER.toString().replace('n','')).call()
+		console.log("1-getExpectedRate res: ", res);
+	}catch(e){
+		console.log("e: ", e);	
+	}
 	kyberBuyPriceDAI = new BigNumber(pancakeSellPriceBURGER.toString().replace('n','') * res[0].toString().replace('n','') / oneEth);
     console.log("Pancake -> Sushi ratio: ", token_name, kyberBuyPriceDAI/oneEth)
 
@@ -245,103 +233,44 @@ async function run_wbnb(token1, token2, token_name){
 	var path = [];
 	path.push(token1);
 	path.push(token2);
-	// console.log("token1: ", token1)
 
 	try{
 		res = await BurgerSwapContractInstance.methods.getExpectedRate(token1, token2, oneEth).call()
+		console.log("2-getExpectedRate res: ", res);
 	}catch(e){
-		console.log("line 247");
 		console.log("e: ", e);	
 	}
-
   	pancakeSellPriceBURGER = res[1];
     path = [];
 	path.push(token2);
 	path.push(token1);
-	// console.log("pancakeSellPriceBURGER: ", pancakeSellPriceBURGER);
-
 	try{
 		res = await PancakeSwapContractInstance.methods.getAmountsOut(pancakeSellPriceBURGER.toString().replace('n',''), path).call() 
+		console.log("2-getAmountsOut res: ", res);
+
 	}catch(e){
-		console.log("line 260");
 		console.log("e: ", e);	
 	}
-
 	pancakeBurgerBURGER = res[1];
 	if (pancakeBurgerBURGER.toString().replace('n','')/oneEth > threshold){
 		console.log("Sushi --> Pancake ratio", token_name, ": ", pancakeBurgerBURGER.toString().replace('n','')/oneEth)
 		// trade(BurgerSwapAddress, PancakeSwapAddress, token2)
 	}
-
-//   console.log("run_wbnb: ", run_wbnb);
-
-//   var path = [];
-//   path.push(token1);
-//   path.push(token2);
-//   PancakeSwapContractInstance.methods.getAmountsOut(oneEth, path).call(function(err, res) {
-//     if (err) {
-//         // return;
-//     }
-//     pancakeSellPriceBURGER = res[1];
-//     console.log("Pancake -> Sushi pancakeSellPriceBURGER: ", pancakeSellPriceBURGER)
-//     BurgerSwapContractInstance.methods.getExpectedRate(token2, token1, pancakeSellPriceBURGER).call(function(err, res) {
-//   				if (err) {
-//   						// console.log("kyberBuyPriceDAI err: ", err);
-//   						// return;
-//   				}
-
-// 		  kyberBuyPriceDAI = new BigNumber(pancakeSellPriceBURGER * res[0] / oneEth);
-// 		  if (kyberBuyPriceDAI/oneEth > threshold){
-//             console.log("Pancake -> Sushi ratio: ", token_name, kyberBuyPriceDAI/oneEth)
-//             // trade(PancakeSwapAddress, BurgerSwapAddress, token2)
-//           }
-//   	});
-
-//   });
-//   var path = [];
-//   path.push(token1);
-//   path.push(token2);
-//   BurgerSwapContractInstance.methods.getExpectedRate(token1, token2, oneEth).call(function(err, res) {
-//     if (err) {
-//         // return;
-//     }
-
-//     pancakeSellPriceBURGER = res[1];
-//     path = [];
-//     path.push(token2);
-//     path.push(token1);
-//     PancakeSwapContractInstance.methods.getAmountsOut(pancakeSellPriceBURGER, path).call(function(err, res) {
-//       if (err) {
-//         //   return;
-//       }
-//       pancakeBurgerBURGER = res[1];
-// 	  if (pancakeBurgerBURGER/oneEth > threshold){
-//         console.log("Sushi --> Pancake ratio", token_name, ": ",pancakeBurgerBURGER/oneEth)
-      
-//       }
-//     });
-//   });
 }
 
-// for (token in tokens){
-//   // console.log("tokens[token]: ", tokens[token])
-//   run_wbnb(tokens['WETH'], tokens[token], token)
-// }
+for (token in tokens){
+  // console.log("tokens[token]: ", tokens[token])
+  if (tokens['WETH'] != tokens[token]){
+	run_wbnb(tokens['WETH'], tokens[token], token);
+  }
+}
 
 setInterval(async function(){
   console.log("start of loop")
   for (token in tokens){
-    // console.log("tokens[token]: ", tokens[token])
-	// try{
-		// console.log("call:", token)
-		if (tokens['WETH'] != tokens[token]){
-			await run_wbnb(tokens['WETH'], tokens[token], token);
-		}
-		// console.log("end call:", token)
-	// }catch(e){
-	// 	console.log("call error e: ", e);
-	// }
-    
+	if (tokens['WETH'] != tokens[token]){
+		run_wbnb(tokens['WETH'], tokens[token], token);
+	}
   }
   console.log("end of loop")
 

@@ -167,5 +167,4 @@ tokens['AUCTION'] = "0xa9b1eb5908cfc3cdf91f9b8b3a74108598009096";
 // tokens['CAPS'] = "0x03be5c903c727ee2c8c4e9bc0acc860cca4715e2";
 
 
-
 exports.tokens = tokens;
