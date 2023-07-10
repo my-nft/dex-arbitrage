@@ -69,11 +69,13 @@ async function run_wbnb(token1, token2, token_name, pancakeAddress, burgerAddres
         trade(pancakeAddress, burgerAddress, token2)
       }
     }catch(e){
-      console.log("dex2 e: ", e);
+      // console.log("path: ", path);
+      // console.log("dex2 e: ", e);
     }
     
   }catch(e){
-    console.log("dex 1e: ", e);
+    // console.log("path: ", path);
+    // console.log("dex 1e: ", e);
   }
 
   try{
@@ -90,7 +92,7 @@ async function run_wbnb(token1, token2, token_name, pancakeAddress, burgerAddres
       pancakeBurgerBURGER = dex2[1];
       if (Number(pancakeBurgerBURGER)/oneEth > threshold){
         console.log("Sushi -> Uniswap ratio: ", token_name, Number(pancakeBurgerBURGER)/oneEth)
-        trade(BurgerSwapAddress, PancakeSwapAddress, token2)
+        trade(burgerAddress, pancakeAddress, token2)
       }
     }catch(e){
       // console.log("path: ", path);
@@ -107,18 +109,27 @@ function tokensLoop(tokensFile, dex1, dex2){
   let { tokens } = require(tokensFile);
   for (token in tokens){
     // console.log("tokens[token]: ", tokens[token])
-    
     if (tokens['WETH'] != tokens[token]){
       run_wbnb(tokens['WETH'], tokens[token], token, dex1, dex2);
     } 
   }
 }
 
-tokensLoop('./TokensSushi.js', process.env.DEX_1, process.env.DEX_2);
-
+tokensLoop('./Tokens.js', process.env.DEX_1, process.env.DEX_2);
+tokensLoop('./Tokens.js', process.env.DEX_1, process.env.DEX_3);
+tokensLoop('./Tokens.js', process.env.DEX_2, process.env.DEX_3);
+tokensLoop('./Tokens.js', process.env.DEX_1, process.env.DEX_4);
+tokensLoop('./Tokens.js', process.env.DEX_2, process.env.DEX_4);
+tokensLoop('./Tokens.js', process.env.DEX_3, process.env.DEX_4);
 
 setInterval(function(){
-  tokensLoop('./TokensSushi.js', process.env.DEX_1, process.env.DEX_2)
+  tokensLoop('./Tokens.js', process.env.DEX_1, process.env.DEX_2);
+  tokensLoop('./Tokens.js', process.env.DEX_1, process.env.DEX_3);
+  tokensLoop('./Tokens.js', process.env.DEX_2, process.env.DEX_3);
+  tokensLoop('./Tokens.js', process.env.DEX_1, process.env.DEX_4);
+  tokensLoop('./Tokens.js', process.env.DEX_2, process.env.DEX_4);
+  tokensLoop('./Tokens.js', process.env.DEX_3, process.env.DEX_4);
+
 }, period);
 
 console.log("loading data...")

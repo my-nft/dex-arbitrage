@@ -1,5 +1,25 @@
 var tokens = {};
 tokens['WETH'] = "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2";
+
+tokens['AMPL'] = "0x830a8512db4F6fCA51968593E2667156C2c483A8"; 
+
+tokens['WBTC'] = "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"; 
+tokens['USDT'] = "0xdac17f958d2ee523a2206206994597c13d831ec7"; 
+tokens['USDC'] = "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48";
+tokens['TrueUSD'] = "0x0000000000085d4780B73119b644AE5ecd22b376";
+tokens['MATIC'] = "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0";
+tokens['SDAO'] = "0x993864e43caa7f7f12953ad6feb1d1ca635b875f";
+tokens['WNCG'] = "0xf203Ca1769ca8e9e8FE1DA9D147DB68B6c919817";
+tokens['CAPS'] = "0x03be5c903c727ee2c8c4e9bc0acc860cca4715e2";
+
+tokens['WBTC'] = "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"; 
+
+tokens['USDT'] = "0xdac17f958d2ee523a2206206994597c13d831ec7"; 
+
+tokens['USDC'] = "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48";
+tokens['TrueUSD'] = "0x0000000000085d4780B73119b644AE5ecd22b376";
+tokens['MATIC'] = "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0";
+
 tokens['DAI'] = "0x6b175474e89094c44da98b954eedeac495271d0f";
 tokens['MKR'] = "0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2";
 tokens['RLC'] = "0x607F4C5BB672230e8672085532f7e901544a7375";
@@ -8,8 +28,8 @@ tokens['BAT'] = "0x0d8775f648430679a709e98d2b0cb6250d2887ef";
 tokens['ENJ'] = "0xf629cbd94d3791c9250152bd8dfbdf380e2a3b9c";
 tokens['MANA'] = "0x0F5D2fB29fb7d3CFeE444a200298f468908cC942";
 tokens['UNI'] = "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984";
-// tokens['USDC'] = "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48";
-tokens['USDT'] = "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48";
+tokens['USDC'] = "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48";
+tokens['USDT'] = "0xdac17f958d2ee523a2206206994597c13d831ec7"; 
 tokens['LINK'] = "0x514910771af9ca656af840dff83e8264ecf986ca";
 tokens['ZRX'] = "0xe41d2489571d322189246dafa5ebde1f4699f498";
 tokens['AAVE'] = "0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9";
@@ -165,6 +185,9 @@ tokens['AUCTION'] = "0xa9b1eb5908cfc3cdf91f9b8b3a74108598009096";
 // tokens['SDAO'] = "0x993864e43caa7f7f12953ad6feb1d1ca635b875f";
 // tokens['WNCG'] = "0xf203Ca1769ca8e9e8FE1DA9D147DB68B6c919817";
 // tokens['CAPS'] = "0x03be5c903c727ee2c8c4e9bc0acc860cca4715e2";
+tokens['WBTC'] = "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"; 
+tokens['TrueUSD'] = "0x0000000000085d4780B73119b644AE5ecd22b376";
+tokens['MATIC'] = "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0";
 
 
 exports.tokens = tokens;
